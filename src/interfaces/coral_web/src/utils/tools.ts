@@ -76,3 +76,49 @@ export const parsePythonInterpreterToolFields = (document: Document) => {
     outputFile,
   };
 };
+
+type Project2025Fields = {
+  pdfUrl?: string;
+  imageUrl?: string;
+  excerptHeadline?: string;
+  excerptSubhead?: string;
+  excerpt?: string;
+  concerns?: string;
+}
+
+export const parseProject2025Fields = (document: Document) => {
+  console.warn(document)
+  if (!document.fields) {
+    return {
+      pdfUrl: undefined,
+      imageUrl: undefined,
+      excerptHeadline: undefined,
+      excerptSubhead: undefined,
+      excerpt: undefined,
+      concerns: undefined
+    }
+  }
+
+  const fields = document.fields as Project2025Fields;
+  let concerns: string[] = []
+  try {
+    if (fields.concerns) {
+      concerns = JSON.parse(fields.concerns)
+    }
+  } catch (e) {
+    console.warn("concerns key was not parseable: ", concerns)
+  }
+
+  if (fields.excerptSubhead && fields.excerptSubhead == 'null') {
+    fields.excerptSubhead = undefined
+  }
+
+  return {
+    pdfUrl: fields.pdfUrl,
+    imageUrl: fields.imageUrl,
+    excerptHeadline: fields.excerptHeadline,
+    excerptSubhead: fields.excerptSubhead,
+    excerpt: fields.excerpt,
+    concerns: concerns
+  }
+}

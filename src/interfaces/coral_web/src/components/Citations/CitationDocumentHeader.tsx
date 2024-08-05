@@ -1,6 +1,6 @@
 import { IconButton } from '@/components/IconButton';
 import { DocumentIcon, Icon, IconName, Text } from '@/components/Shared';
-import { TOOL_FALLBACK_ICON, TOOL_ID_TO_DISPLAY_INFO, TOOL_WEB_SEARCH_ID } from '@/constants';
+import { TOOL_FALLBACK_ICON, TOOL_ID_TO_DISPLAY_INFO, TOOL_PROJECT_2025, TOOL_WEB_SEARCH_ID } from '@/constants';
 import { cn, getSafeUrl, getWebDomain } from '@/utils';
 
 const getWebSourceName = (toolId?: string) => {
@@ -8,6 +8,8 @@ const getWebSourceName = (toolId?: string) => {
     return '';
   } else if (toolId === TOOL_WEB_SEARCH_ID) {
     return 'from the web';
+  } else if (toolId === TOOL_PROJECT_2025) {
+    return ''
   }
   return `from ${toolId}`;
 };
@@ -137,6 +139,7 @@ export const CitationDocumentHeader: React.FC<Props> = ({
               className={cn('ml-1 hidden', 'transition-colors duration-200 ease-in-out', {
                 'text-secondary-800': !isSelected,
                 'group-hover:block': safeUrl,
+                'inline-block': isExpanded,
               })}
             />
           </div>

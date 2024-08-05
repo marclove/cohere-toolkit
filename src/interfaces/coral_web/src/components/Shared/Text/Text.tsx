@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef } from 'react';
 
 import { cn } from '@/utils';
 
-type AsElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'span' | 'p' | 'div' | 'li' | 'label' | 'pre';
+export type AsElement = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'span' | 'p' | 'div' | 'li' | 'label' | 'pre';
 type StyleAs = keyof typeof STYLE_LEVEL_TO_CLASSES;
 
 type TextProps<T extends AsElement> = {
@@ -30,6 +30,7 @@ export const STYLE_LEVEL_TO_CLASSES = {
   caption: 'text-caption font-code',
   code: 'text-code font-code',
   'code-sm': 'text-code-sm font-code',
+  blockquote: 'text-p font-body p-5 bg-slate-50/50'
 };
 
 const getStyleLevelClasses = (level: StyleAs | AsElement) => {

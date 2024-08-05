@@ -83,7 +83,7 @@ export const CitationTextHighlighter: React.FC<Props> = ({
             message={message?.originalText ?? ''}
           />
         ),
-        title: 'OUTPUT',
+        title: '',
         kind: 'coral-mobile-only',
       });
     }

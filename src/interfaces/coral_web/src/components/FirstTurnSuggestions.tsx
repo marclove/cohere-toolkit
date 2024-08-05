@@ -15,36 +15,36 @@ type Prompt = {
 };
 
 const SUGGESTED_PROMPTS: Prompt[] = [
-  {
-    label: 'Plot real estate data',
-    params: {
-      fileIds: [],
-      tools: [
-        { name: TOOL_PYTHON_INTERPRETER_ID },
-        { name: TOOL_CALCULATOR_ID },
-        { name: TOOL_WEB_SEARCH_ID },
-      ],
-    },
-    message:
-      'Plot the average 1 bedroom rental price in Jan 2024 for the 5 most expensive cities in North America',
-  },
-  {
-    label: 'Clean up data in Python',
-    params: { fileIds: [], tools: [] },
-    message: `I want to figure out how to remove nan values from my array. For example, my array looks something like this:
+  // {
+  //   label: 'Plot real estate data',
+  //   params: {
+  //     fileIds: [],
+  //     tools: [
+  //       { name: TOOL_PYTHON_INTERPRETER_ID },
+  //       { name: TOOL_CALCULATOR_ID },
+  //       { name: TOOL_WEB_SEARCH_ID },
+  //     ],
+  //   },
+  //   message:
+  //     'Plot the average 1 bedroom rental price in Jan 2024 for the 5 most expensive cities in North America',
+  // },
+  // {
+  //   label: 'Clean up data in Python',
+  //   params: { fileIds: [], tools: [] },
+  //   message: `I want to figure out how to remove nan values from my array. For example, my array looks something like this:
     
-    x = [1400, 1500, 1600, nan, nan, nan, 1700] #Not in this exact configuration
+  //   x = [1400, 1500, 1600, nan, nan, nan, 1700] #Not in this exact configuration
         
-    How can I remove the nan values from x to get something like:
+  //   How can I remove the nan values from x to get something like:
         
-    x = [1400, 1500, 1600, 1700]`,
-  },
-  {
-    label: 'Write a business plan in French',
-    params: { fileIds: [], tools: [] },
-    message:
-      'Write a business plan outline for an marketing agency in French. Highlight all the section titles, and make it less than 300 words.',
-  },
+  //   x = [1400, 1500, 1600, 1700]`,
+  // },
+  // {
+  //   label: 'Write a business plan in French',
+  //   params: { fileIds: [], tools: [] },
+  //   message:
+  //     'Write a business plan outline for an marketing agency in French. Highlight all the section titles, and make it less than 300 words.',
+  // },
 ];
 
 type Props = {

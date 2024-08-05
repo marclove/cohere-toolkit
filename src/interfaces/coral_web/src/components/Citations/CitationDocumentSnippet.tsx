@@ -4,10 +4,11 @@ import { Document } from '@/cohere-client';
 import { CitationDocumentHeader } from '@/components/Citations/CitationDocumentHeader';
 import { B64Image } from '@/components/MarkdownImage';
 import { Markdown, Text } from '@/components/Shared';
-import { TOOL_PYTHON_INTERPRETER_ID } from '@/constants';
+import type { AsElement  } from '@/components/Shared';
+import { TOOL_PROJECT_2025, TOOL_PYTHON_INTERPRETER_ID } from '@/constants';
 import { ModalContext } from '@/context/ModalContext';
 import { cn } from '@/utils';
-import { PythonInterpreterOutputFile, parsePythonInterpreterToolFields } from '@/utils/tools';
+import { PythonInterpreterOutputFile, parsePythonInterpreterToolFields, parseProject2025Fields } from '@/utils/tools';
 
 type Props = {
   document: Document;
@@ -91,6 +92,52 @@ export const CitationDocumentSnippet: React.FC<
     });
   };
 
+  const openFullProject2025Snippet = () => {
+    if (toolId === TOOL_PROJECT_2025 && document.fields) {}
+    console.log(document)
+    const {
+      pdfUrl,
+      excerptHeadline,
+      excerptSubhead,
+      excerpt,
+      concerns
+    } = parseProject2025Fields(document)
+    
+    const title = excerptSubhead ? excerptSubhead : excerptHeadline
+
+    open({
+      title: '',
+      content: (
+        <div className="flex flex-col gap-y-3">
+          <CitationDocumentHeader
+            toolId={toolId}
+            url={pdfUrl ?? ''}
+            title={title}
+            isExpandable={false}
+            isExpanded={true}
+            isSelected={true}
+            onToggleSnippet={onToggle}
+          />
+          <BlockQuoteSnippet snippet={excerpt} keyword={keyword} />
+          <Text className='px-2 pt-3' styleAs="overline">Potential Issues</Text>
+          {concerns &&
+            <ul className='px-5'>
+              {concerns.map((concern, i) => {
+                  return (
+                    <Snippet key={i} as="li" snippet={concern} keyword={keyword} />
+                  );
+                }
+              )}
+            </ul>
+          }
+        </div>
+      ),
+      kind: 'coral',
+    })
+  }
+
+  const openFullSnippet = toolId === TOOL_PROJECT_2025 ? openFullProject2025Snippet : openFullSnippetModal
+
   if (toolId === TOOL_PYTHON_INTERPRETER_ID && document.fields) {
     const {
       success,
@@ -126,7 +173,7 @@ export const CitationDocumentSnippet: React.FC<
 
       <button
         className="self-end p-0 text-primary-900 transition-colors ease-in-out hover:text-primary-700"
-        onClick={openFullSnippetModal}
+        onClick={openFullSnippet}
         data-testid="button-see-full-snippet"
       >
         <Text as="span" styleAs="caption">
@@ -142,12 +189,13 @@ const Snippet: React.FC<{
   snippet: string | undefined;
   beforeKeywordCharLimit?: number;
   lineLimitClass?: string;
-}> = ({ snippet, keyword, beforeKeywordCharLimit, lineLimitClass }) => {
+  as?: AsElement;
+}> = ({ snippet, keyword, beforeKeywordCharLimit, lineLimitClass, as = 'p' }) => {
   const snippetSections = useMemo(() => getSnippetSegments(snippet, keyword), [snippet, keyword]);
   if (!snippetSections) return null;
 
   return (
-    <Text className={cn('content text-primary-900', lineLimitClass)}>
+    <Text as={as ? as : 'p'} className={cn('content text-primary-900', lineLimitClass)}>
       {snippetSections.map(({ beforeKeyword, snippetKeyword }, i) => {
         return (
           <Fragment key={i}>
@@ -162,6 +210,37 @@ const Snippet: React.FC<{
         );
       })}
     </Text>
+  );
+};
+
+const BlockQuoteSnippet: React.FC<{
+  keyword: string;
+  snippet: string | undefined;
+  beforeKeywordCharLimit?: number;
+  lineLimitClass?: string;
+}> = ({ snippet, keyword, beforeKeywordCharLimit, lineLimitClass }) => {
+  const snippetSections = useMemo(() => getSnippetSegments(snippet, keyword), [snippet, keyword]);
+  if (!snippetSections) return null;
+
+  return (
+    <div className="p-5 flex flex-col space-y-2 bg-slate-50/50">
+      <Text styleAs="overline">Excerpt</Text>
+      <Text styleAs="p-sm" className={cn('content flex flex-col space-y-10 pl-3 border-l border-slate-400 text-primary-900', lineLimitClass)}>
+      {snippetSections.map(({ beforeKeyword, snippetKeyword }, i) => {
+        return (
+          <Fragment key={i}>
+            {i === 0 &&
+            beforeKeywordCharLimit !== undefined &&
+            beforeKeyword.length > beforeKeywordCharLimit &&
+            snippetKeyword
+              ? `...${beforeKeyword.slice(-1 * beforeKeywordCharLimit)}`
+              : beforeKeyword}
+            {snippetKeyword ? <span className="font-medium">{snippetKeyword}</span> : null}
+          </Fragment>
+        );
+      })}
+      </Text>
+    </div>
   );
 };
 

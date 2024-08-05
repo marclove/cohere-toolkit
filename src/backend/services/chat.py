@@ -3,13 +3,6 @@ import logging
 from typing import Any, Generator, List, Union
 from uuid import uuid4
 
-from cohere.types import StreamedChatResponse
-from fastapi import HTTPException, Request
-from fastapi.encoders import jsonable_encoder
-from langchain_core.agents import AgentActionMessageLog
-from langchain_core.runnables.utils import AddableDict
-from starlette.exceptions import HTTPException
-
 from backend.chat.collate import to_dict
 from backend.chat.enums import StreamEvent
 from backend.config.tools import AVAILABLE_TOOLS
@@ -24,11 +17,7 @@ from backend.database_models.database import DBSessionDep
 from backend.database_models.document import Document
 from backend.database_models.message import Message, MessageAgent
 from backend.database_models.tool_call import ToolCall as ToolCallModel
-from backend.routers.utils import (
-    add_agent_to_request_state,
-    add_session_user_to_request_state,
-)
-from backend.schemas.agent import Agent
+from backend.routers.utils import add_agent_to_request_state
 from backend.schemas.chat import (
     BaseChatRequest,
     ChatMessage,
@@ -54,6 +43,13 @@ from backend.schemas.file import UpdateFile
 from backend.schemas.search_query import SearchQuery
 from backend.schemas.tool import Tool, ToolCall, ToolCallDelta
 from backend.services.auth.utils import get_header_user_id
+from cohere.types import StreamedChatResponse
+from community.config.tools import COMMUNITY_TOOLS, CommunityToolName
+from fastapi import HTTPException, Request
+from fastapi.encoders import jsonable_encoder
+from langchain_core.agents import AgentActionMessageLog
+from langchain_core.runnables.utils import AddableDict
+from starlette.exceptions import HTTPException
 
 
 def process_chat(
@@ -156,7 +152,15 @@ def process_chat(
     chat_request.chat_history = chat_history
     chat_request.conversation_id = ""
 
-    tools = chat_request.tools
+    # MODIFICATION: Override tools
+    # tools = chat_request.tools
+    project_2025 = COMMUNITY_TOOLS.get(CommunityToolName.Project_2025)
+    if project_2025:
+        tools: list[Tool] = [project_2025]
+        chat_request.tools = tools
+    else:
+        tools: list[Tool] = []
+
     managed_tools = (
         len([tool.name for tool in tools if tool.name in AVAILABLE_TOOLS]) > 0
     )

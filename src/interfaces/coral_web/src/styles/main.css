@@ -17,6 +17,14 @@
     scrollbar-color: theme('colors.marble.500') transparent;
   }
 
+  ol, ul {
+    @apply list-disc list-outside
+  }
+
+  li {
+    @apply mb-2
+  }
+
   ::-webkit-scrollbar {
     @apply h-2.5 w-2.5;
   }

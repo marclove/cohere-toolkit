@@ -140,7 +140,7 @@ const MessageRow = forwardRef<HTMLDivElement, Props>(function MessageRowInternal
               iconAtStart
               onClick={onCopy}
             />
-            {hasSteps && (
+            {/* {hasSteps && (
               <Button
                 label={`${isStepsExpanded ? 'Hide' : 'Show'} steps`}
                 startIcon={<Icon name="list" />}
@@ -150,7 +150,7 @@ const MessageRow = forwardRef<HTMLDivElement, Props>(function MessageRowInternal
                 animate={false}
                 onClick={() => setIsStepsExpanded((prevIsExpanded) => !prevIsExpanded)}
               />
-            )}
+            )} */}
           </div>
         </div>
       </LongPressMenu>
@@ -185,7 +185,7 @@ const MessageRow = forwardRef<HTMLDivElement, Props>(function MessageRowInternal
                 'hidden md:invisible md:flex md:group-hover:visible': !isLast,
               })}
             >
-              {hasSteps && (
+              {/* {hasSteps && (
                 <Tooltip label={`${isStepsExpanded ? 'Hide' : 'Show'} steps`} hover>
                   <IconButton
                     iconName="list"
@@ -199,7 +199,7 @@ const MessageRow = forwardRef<HTMLDivElement, Props>(function MessageRowInternal
                     onClick={() => setIsStepsExpanded((prevIsExpanded) => !prevIsExpanded)}
                   />
                 </Tooltip>
-              )}
+              )} */}
               <CopyToClipboardIconButton value={getMessageText()} onClick={onCopy} />
             </div>
           </div>

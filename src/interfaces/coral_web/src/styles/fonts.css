@@ -1,21 +1,27 @@
 @font-face {
   font-family: 'CohereText';
-  src: url('https://fonts.cohere.com/CohereText-Regular.woff2') format('woff2'),
-    url('https://fonts.cohere.com/CohereText-Regular.woff') format('woff');
-  font-weight: 400;
+  src: url("../assets/fonts/FixelVariable.woff2") format("woff2");
+  ascent-override: 90%;
+  /* src: url('https://fonts.cohere.com/CohereText-Regular.woff2') format('woff2'),
+    url('https://fonts.cohere.com/CohereText-Regular.woff') format('woff'); */
+  font-weight: 1 1000;
   font-style: normal;
   font-display: swap;
 }
 
+/*
 @font-face {
   font-family: 'CohereText';
-  /* In the nature design system, bolded fonts always use Cohere Variable. */
+  src: url("../assets/fonts/FixelVariable.woff2") format("woff2");
+  ascent-override: 90%;
   src: url('https://fonts.cohere.com/CohereVariable.woff2') format('woff2'),
     url('https://fonts.cohere.com/CohereVariable.woff') format('woff');
   font-weight: 500 525;
   font-style: normal;
   font-display: swap;
 }
+*/
+
 
 @font-face {
   font-family: 'CohereMono';
@@ -35,7 +41,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+/* 
 @font-face {
   font-family: 'CohereVariable';
   src: url('https://fonts.cohere.com/CohereVariable.woff2') format('woff2'),
@@ -44,7 +50,7 @@
   font-style: normal;
   font-display: swap;
 }
-
+ */
 @font-face {
   font-family: 'CohereIconDefault';
   src: url('../../public/fonts/CohereIcon-Default.woff') format('woff');
@@ -60,3 +66,49 @@
   font-style: normal;
   font-display: block;
 }
+
+@font-face {
+  font-display: swap;
+  font-family: Fixel;
+  font-style: normal;
+  font-weight: 100 900;
+  ascent-override: 90%;
+  src: url("/fonts/FixelVariable.woff2") format("woff2")
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Fixel;
+  font-style: italic;
+  font-weight: 100 900;
+  src: url("/fonts/FixelVariableItalic.woff2") format("woff2")
+}
+
+/* 
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 100 700;
+  src: url('https://fonts.gstatic.com/s/materialsymbolsrounded/v198/sykg-zNym6YjUruM-QrEh7-nyTnjDwKNJ_190FjzaqkNCeE.woff2') format('woff2');
+}
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 20
+} */

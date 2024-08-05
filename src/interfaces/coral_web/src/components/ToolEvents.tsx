@@ -9,6 +9,7 @@ import {
   TOOL_ID_TO_DISPLAY_INFO,
   TOOL_PYTHON_INTERPRETER_ID,
   TOOL_WEB_SEARCH_ID,
+  TOOL_PROJECT_2025,
 } from '@/constants';
 import { cn } from '@/utils';
 
@@ -54,7 +55,8 @@ type ToolEventProps = {
  */
 const ToolEvent: React.FC<ToolEventProps> = ({ plan, event }) => {
   if (!event) {
-    return <ToolEventWrapper>{plan}</ToolEventWrapper>;
+    return <></>
+    // return <ToolEventWrapper>{plan}</ToolEventWrapper>;
   }
 
   const toolName = event.name;
@@ -98,6 +100,14 @@ const ToolEvent: React.FC<ToolEventProps> = ({ plan, event }) => {
           Searching <b className="font-medium">{event?.parameters?.query as any}</b>
         </ToolEventWrapper>
       );
+    }
+
+    case TOOL_PROJECT_2025: {
+      return (
+        <ToolEventWrapper icon={icon}>
+          Searching Project 2025 for passages related to <b className="font-medium">{event?.parameters?.query as any}</b>
+        </ToolEventWrapper>
+      )
     }
 
     default: {

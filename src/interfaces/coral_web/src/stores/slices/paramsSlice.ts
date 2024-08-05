@@ -1,15 +1,34 @@
 import { StateCreator } from 'zustand';
 
-import { CohereChatRequest, DEFAULT_CHAT_TEMPERATURE } from '@/cohere-client';
+import { CohereChatRequest, DEFAULT_CHAT_TEMPERATURE, ManagedTool, Category } from '@/cohere-client';
 import { isDefaultFileLoaderTool } from '@/utils';
 
 import { StoreState } from '..';
+
+const Project2025Tool: ManagedTool = {
+  name: 'project_2025',
+  display_name: 'Project 2025',
+  description: 'Retrieves our analysis of Project 2025.',
+  parameter_definitions: {
+    "query": {
+        "description": "Query for retrieval.",
+        "type": "str",
+        "required": true,
+    }
+  },
+  is_visible: true,
+  is_available: true,
+  is_auth_required: false,
+  error_message: "Project 2025 is not available.",
+  auth_url: null,
+  category: Category.DATA_LOADER
+}
 
 const INITIAL_STATE = {
   model: undefined,
   temperature: DEFAULT_CHAT_TEMPERATURE,
   preamble: '',
-  tools: [],
+  tools: [Project2025Tool],
   fileIds: [],
   deployment: undefined,
   deploymentConfig: undefined,
@@ -43,7 +62,7 @@ export const createParamsSlice: StateCreator<StoreState, [], [], ParamStore> = (
         params: {
           ...state.params,
           ...params,
-          ...(tools ? { tools } : []),
+          ...(tools ? { tools } : [Project2025Tool]),
           ...(fileIds ? { fileIds } : {}),
         },
       };

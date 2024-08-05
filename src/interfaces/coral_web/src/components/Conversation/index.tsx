@@ -168,9 +168,10 @@ const Conversation: React.FC<Props> = ({
             messages={messages}
             streamingMessage={streamingMessage}
             agentId={agentId}
+            onSend={handleSend}
             composer={
               <>
-                <WelcomeGuideTooltip step={3} className="absolute bottom-full mb-4" />
+                {/* <WelcomeGuideTooltip step={3} className="absolute bottom-full mb-4" /> */}
                 <Composer
                   isStreaming={isStreaming}
                   value={userMessage}

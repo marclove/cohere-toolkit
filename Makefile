@@ -1,3 +1,5 @@
+dev2:
+	docker compose up --watch
 dev:
 	@docker compose watch
 down:

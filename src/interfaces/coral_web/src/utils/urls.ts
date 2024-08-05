@@ -13,6 +13,10 @@ export const getWebDomain = (url?: string) => {
   try {
     const urlObj = new URL(url);
 
+    if (urlObj.hostname.match("project2025")) {
+      return "Project 2025";
+    }
+
     const parsed = parseDomain(urlObj.hostname);
 
     if (parsed.type === ParseResultType.Listed) {

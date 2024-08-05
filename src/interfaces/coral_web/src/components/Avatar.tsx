@@ -36,12 +36,12 @@ export const Avatar: React.FC<Props> = ({ message }) => {
         'h-7 w-7 md:h-9 md:w-9',
         {
           'bg-volcanic-500': isErroredOrAborted,
-          'bg-quartz-700': isUser,
+          'bg-sky-600': isUser,
         },
         isGroundingOn
           ? {
-              'bg-primary-900': isFulfilled,
-              'bg-primary-400': isTypingOrLoading,
+              'bg-red-800': isFulfilled,
+              'bg-red-400': isTypingOrLoading,
             }
           : {
               'bg-secondary-400': isFulfilled,

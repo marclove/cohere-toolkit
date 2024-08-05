@@ -82,6 +82,7 @@ optional = true
 [tool.poetry.group.community.dependencies]
 wolframalpha = "^5.0.0"
 torch = "^2.3.0"
+ragatouille = "^0.0.8"
 
 [tool.poetry.group.local-model]
 optional = true

@@ -127,7 +127,7 @@ export const ToolsTab: React.FC<{ className?: string }> = ({ className = '' }) =
           </>
         )}
       </article>
-      <WelcomeGuideTooltip step={2} className="fixed right-0 mr-3 mt-12 md:right-full md:mt-0" />
+      {/* <WelcomeGuideTooltip step={2} className="fixed right-0 mr-3 mt-12 md:right-full md:mt-0" /> */}
     </section>
   );
 };

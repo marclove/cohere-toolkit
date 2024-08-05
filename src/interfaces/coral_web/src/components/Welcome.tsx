@@ -7,16 +7,18 @@ import { useAgent } from '@/hooks/agents';
 import { BotState } from '@/types/message';
 import { cn } from '@/utils';
 import { getCohereColor } from '@/utils/getCohereColor';
+import { ConfigurableParams } from '@/stores/slices/paramsSlice';
 
 type Props = {
   show: boolean;
   agentId?: string;
+  onSend: (message?: string, overrides?: Partial<ConfigurableParams>) => void;
 };
 
 /**
  * @description Welcome message shown to the user when they first open the chat.
  */
-export const Welcome: React.FC<Props> = ({ show, agentId }) => {
+export const Welcome: React.FC<Props> = ({ show, agentId, onSend }) => {
   const { data: agent, isLoading } = useAgent({ agentId });
   const isAgent = agentId !== undefined && !isLoading && !!agent;
 
@@ -33,7 +35,7 @@ export const Welcome: React.FC<Props> = ({ show, agentId }) => {
       leaveTo="opacity-0"
       as="div"
     >
-      <div
+      {/* <div
         className={cn(
           'flex h-7 w-7 items-center justify-center rounded md:h-9 md:w-9',
           isAgent && getCohereColor(agent.id),
@@ -49,22 +51,37 @@ export const Welcome: React.FC<Props> = ({ show, agentId }) => {
             {agent.name[0]}
           </Text>
         )}
-      </div>
+      </div> */}
 
       <Text
         styleAs="p-lg"
         className={cn(
-          'text-center text-secondary-800 md:!text-h4',
+          'text-center text-balance text-secondary-800 md:!text-h4 font-light',
           isAgent && getCohereColor(agent.id, { background: false })
         )}
       >
-        {!isAgent ? 'Need help? Your wish is my command.' : agent.name}
+        {!isAgent ? 'What would you like to know about Project 2025?' : agent.name}
       </Text>
-      {isAgent && (
+      <Text styleAs="p" className="text-center text-balance">
+        Project 2025 is a 900&ndash;page plan for a second Trump&nbsp;Administration, written by the first Trump&nbsp;Administration.
+      </Text>
+      <div className="grid grid-cols-2 gap-4 mt-3 auto-rows-min w-96 text-sm">
+        {[
+          "How will it affect a woman's right to choose?",
+          "Will this impact DACA recipients?",
+          "What will happen to public education?",
+          "I belong to a union. Should I be concerned?"
+        ].map((q) => {
+          return (
+            <div className="border rounded w-full px-4 py-2 cursor-pointer" onClick={() => onSend(q)}>{q}</div>
+          );
+        })}
+      </div>
+      {/* {isAgent && (
         <Text className="!text-p-md text-center text-volcanic-900 md:!text-p-lg">
           {agent.description}
         </Text>
-      )}
+      )} */}
     </Transition>
   );
 };

@@ -190,7 +190,7 @@ export const Composer: React.FC<Props> = ({
             className={cn(
               'w-full flex-1 resize-none overflow-hidden',
               'self-center',
-              'px-2 pb-3 pt-2 md:px-4 md:pb-6 md:pt-4',
+              'px-2 pb-3 pt-2 md:px-4 md:pb-4 md:pt-4',
               'rounded',
               'bg-marble-100',
               'transition ease-in-out',
@@ -226,7 +226,8 @@ export const Composer: React.FC<Props> = ({
             {isReadyToReceiveMessage ? <Icon name="arrow-right" /> : <Square />}
           </button>
         </div>
-        <ComposerFiles />
+        {
+          /* <ComposerFiles />
         <ComposerToolbar
           isStreaming={isStreaming}
           onUploadFile={onUploadFile}
@@ -241,7 +242,8 @@ export const Composer: React.FC<Props> = ({
             onToggle: handleDataSourceMenuClick,
             onSeeAll: () => textareaRef.current?.focus(),
           }}
-        />
+        /> */
+        }
       </div>
       <ComposerError className="pt-2" />
     </div>

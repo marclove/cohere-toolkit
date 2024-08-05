@@ -2,6 +2,7 @@ from backend.schemas.tool import Category, ManagedTool
 from backend.tools.base import BaseTool
 from community.tools.arxiv import ArxivRetriever
 from community.tools.clinicaltrials import ClinicalTrials
+from community.tools.colbert import ColbertRetriever
 from community.tools.connector import ConnectorRetriever
 from community.tools.llama_index import LlamaIndexUploadPDFRetriever
 from community.tools.pub_med import PubMedRetriever
@@ -14,4 +15,5 @@ __all__ = [
     "ConnectorRetriever",
     "LlamaIndexUploadPDFRetriever",
     "PubMedRetriever",
+    "ColbertRetriever",
 ]

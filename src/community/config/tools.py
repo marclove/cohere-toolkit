@@ -4,6 +4,7 @@ from community.tools import (
     ArxivRetriever,
     Category,
     ClinicalTrials,
+    ColbertRetriever,
     ConnectorRetriever,
     LlamaIndexUploadPDFRetriever,
     ManagedTool,
@@ -19,6 +20,7 @@ class CommunityToolName(StrEnum):
     File_Upload_LlamaIndex = "file_reader_llamaindex"
     Wolfram_Alpha = "wolfram_alpha"
     ClinicalTrials = "clinical_trials"
+    Project_2025 = "project_2025"
 
 
 COMMUNITY_TOOLS = {
@@ -38,6 +40,23 @@ COMMUNITY_TOOLS = {
         error_message="ArxivRetriever is not available.",
         category=Category.DataLoader,
         description="Retrieves documents from Arxiv.",
+    ),
+    CommunityToolName.Project_2025: ManagedTool(
+        name=CommunityToolName.Project_2025,
+        display_name="Project 2025",
+        implementation=ColbertRetriever,
+        parameter_definitions={
+            "query": {
+                "description": "Query for retrieval.",
+                "type": "str",
+                "required": True,
+            }
+        },
+        is_visible=True,
+        is_available=ColbertRetriever.is_available(),
+        error_message="Project 2025 is not available.",
+        category=Category.DataLoader,
+        description="Retrieves our analysis of Project 2025.",
     ),
     CommunityToolName.Connector: ManagedTool(
         name=CommunityToolName.Connector,

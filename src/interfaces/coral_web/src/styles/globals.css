@@ -8,7 +8,49 @@ body {
   background-color: theme('colors.marble.100');
   font-family: theme('fontFamily.body');
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 450;
+}
+
+.input {
+  flex-shrink: 1;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  line-height: 2;
+  line-height: 1.5rem;
+  border-radius: var(--rounded-btn,.5rem);
+  border-width: 1px;
+  border-color: transparent;
+  --tw-bg-opacity: 1;
+  background-color: theme('colors.marble.100');
+}
+
+.input input {
+  --tw-bg-opacity: 1;
+  background-color: theme('colors.marble.100');
+  background-color: transparent
+}
+
+.input input:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px
+}
+
+.input-bordered {
+  border-color: theme('colors.marble.500');
+}
+
+.input:focus,.input:focus-within {
+  box-shadow: none;
+  border-color: theme('colors.marble.500');
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 2px;
+  outline-color: theme('colors.marble.500');
 }
 
 @layer utilities {

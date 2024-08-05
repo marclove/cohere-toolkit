@@ -7,7 +7,7 @@ import { EditEnvVariablesButton } from '@/components/EditEnvVariablesButton';
 import { NavigationUserMenu } from '@/components/NavigationUserMenu';
 import { SettingsDrawer } from '@/components/Settings/SettingsDrawer';
 import { Banner } from '@/components/Shared';
-import { NavigationBar } from '@/components/Shared/NavigationBar/NavigationBar';
+import { NavigationBar } from '@/components/Shared/Project2025NavigationBar';
 import { PageHead } from '@/components/Shared/PageHead';
 import { BannerContext } from '@/context/BannerContext';
 import { useIsDesktop } from '@/hooks/breakpoint';
@@ -73,8 +73,6 @@ export const Layout: React.FC<Props> = ({ title = 'Chat', children }) => {
       <div className="flex h-screen w-full flex-1 flex-col gap-3 bg-secondary-100 p-3">
         <NavigationBar>
           <span className="flex items-center gap-x-2">
-            <DeploymentsDropdown />
-            <EditEnvVariablesButton className="py-0" />
             {userMenu}
           </span>
         </NavigationBar>

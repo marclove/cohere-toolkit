@@ -3,7 +3,7 @@ from backend.schemas.chat import ChatRole
 
 DEFAULT_TITLE = "New Conversation"
 GENERATE_TITLE_PROMPT = """# TASK
-Given the following conversation history, write a short title that summarizes the topic of the conversation. Be concise and respond with just the title.
+Given the following conversation history, write a short title that summarizes the topic of the conversation. Be concise and respond with just the title. Do not mention "Project 2025".
 
 ## START CHATLOG
 %s

@@ -1,9 +1,8 @@
 from enum import StrEnum
 from typing import Any, Dict, List
 
-from pydantic import Field
-
 from backend.schemas.chat import BaseChatRequest
+from pydantic import Field
 
 
 class CohereChatPromptTruncation(StrEnum):
@@ -39,7 +38,7 @@ class CohereChatRequest(BaseChatRequest):
         """,
     )
     model: str | None = Field(
-        default="command-r",
+        default="command-r-plus",
         title="The model to use for generating the response.",
     )
     temperature: float | None = Field(
@@ -60,7 +59,7 @@ class CohereChatRequest(BaseChatRequest):
         ge=0,
     )
     preamble: str | None = Field(
-        default=None,
+        default="You are a helpful assistant who only answers questions about Project 2025 and its potential affects. You only answer questions about politics and public policy, grounded in retrieved documents. If you are asked about anything else, you reply, \"I'm sorry, I can't help with that.\"",
         title="A string to override the preamble.",
     )
     file_ids: List[str] | None = Field(

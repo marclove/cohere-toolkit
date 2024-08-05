@@ -13,6 +13,7 @@ import { useFixCopyBug } from '@/hooks/fixCopyBug';
 import { useAgentsStore, useCitationsStore } from '@/stores';
 import { ChatMessage, MessageType, StreamingMessage, isFulfilledMessage } from '@/types/message';
 import { cn } from '@/utils';
+import { ConfigurableParams } from '@/stores/slices/paramsSlice';
 
 type Props = {
   isStreaming: boolean;
@@ -24,6 +25,7 @@ type Props = {
   composer: ReactNode;
   conversationId?: string;
   scrollViewClassName?: string;
+  onSend: (message?: string, overrides?: Partial<ConfigurableParams>) => void;
 };
 
 /**
@@ -166,7 +168,7 @@ type MessagesProps = Props;
  * This component is in charge of rendering the messages.
  */
 const Messages = forwardRef<HTMLDivElement, MessagesProps>(function MessagesInternal(
-  { onRetry, messages, streamingMessage, agentId },
+  { onRetry, messages, streamingMessage, agentId, onSend },
   ref
 ) {
   const isChatEmpty = messages.length === 0;
@@ -174,7 +176,7 @@ const Messages = forwardRef<HTMLDivElement, MessagesProps>(function MessagesInte
   if (isChatEmpty) {
     return (
       <div className="m-auto p-4">
-        <Welcome show={isChatEmpty} agentId={agentId} />
+        <Welcome show={isChatEmpty} agentId={agentId} onSend={onSend} />
       </div>
     );
   }

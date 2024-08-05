@@ -160,7 +160,7 @@ export const Header: React.FC<Props> = ({ isStreaming, agentId }) => {
             iconName="new-message"
             onClick={handleNewChat}
           />
-          <div className="relative">
+          {/* <div className="relative">
             <IconButton
               tooltip={{ label: 'Settings', placement: 'bottom-end', size: 'md' }}
               className="hidden md:flex"
@@ -174,7 +174,7 @@ export const Header: React.FC<Props> = ({ isStreaming, agentId }) => {
                 'delay-1000': !welcomeGuideState || welcomeGuideState === WelcomeGuideStep.ONE,
               })}
             />
-          </div>
+          </div> */}
           <IconButton
             tooltip={{
               label: isAgentCreator ? 'Edit assistant' : 'About assistant',

@@ -3,6 +3,7 @@ import logging
 import os
 import threading
 import time
+from distutils.util import strtobool
 from typing import Any, Dict, Generator, List
 
 import cohere
@@ -26,12 +27,12 @@ COHERE_API_KEY_ENV_VAR = "COHERE_API_KEY"
 COHERE_ENV_VARS = [COHERE_API_KEY_ENV_VAR]
 DEFAULT_RERANK_MODEL = "rerank-english-v2.0"
 
-
 class CohereDeployment(BaseDeployment):
     """Cohere Platform Deployment."""
 
     client_name = "cohere-toolkit"
     api_key = get_model_config_var(COHERE_API_KEY_ENV_VAR)
+    _rerank_enabled = bool(strtobool(os.environ.get("COHERE_RERANK_ENABLED", 'false')))
 
     def __init__(self, **kwargs: Any):
         # Override the environment variable from the request
@@ -39,7 +40,7 @@ class CohereDeployment(BaseDeployment):
 
     @property
     def rerank_enabled(self) -> bool:
-        return True
+        return self._rerank_enabled
 
     @classmethod
     def list_models(cls) -> List[str]:

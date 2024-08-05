@@ -5,5 +5,6 @@ import { Tool } from '@/cohere-client';
  * Note: this doesn't mean that RAG was used, just that it's on.
  */
 export const isGroundingOn = (tools: Tool[], documents: string[]) => {
-  return tools.length > 0 || documents.length > 0;
+  // return tools.length > 0 || documents.length > 0;
+  return true;
 };
