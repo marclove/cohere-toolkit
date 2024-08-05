@@ -11,6 +11,6 @@ sed -i '/startupProbe:/,/timeoutSeconds: 240/c\
           periodSeconds: 1\
           failureThreshold: 120\
           httpGet:\
-            path: /api/health\
-            port: 4000' service.yaml
+            path: /health\
+            port: 8000' service.yaml
 gcloud run services replace service.yaml --project $GOOGLE_CLOUD_PROJECT --region $GOOGLE_CLOUD_REGION
